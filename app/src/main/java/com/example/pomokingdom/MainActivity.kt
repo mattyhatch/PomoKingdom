@@ -8,6 +8,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pomokingdom.databinding.ActivityMainBinding
 import com.example.pomokingdom.retrofit.MyService
 import com.example.pomokingdom.retrofit.RetrofitClient
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.register2.setOnClickListener {register()}
         binding.login1.setOnClickListener {login()}
+
     }
     private fun register() {
         val intent = Intent(this,LoginActivity::class.java)
@@ -60,4 +62,7 @@ class MainActivity : AppCompatActivity() {
             }
         )
     }
+
+
+
 }

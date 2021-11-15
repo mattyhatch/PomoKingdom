@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Oskiez/StudioProjects/PomoKingdom/app/src/main/res/layout/activity_home.xml" value="0.49230072463768115" />
+        <entry key="..\:/Users/Oskiez/StudioProjects/PomoKingdom/app/src/main/res/layout/activity_login.xml" value="0.49230072463768115" />
+        <entry key="..\:/Users/Oskiez/StudioProjects/PomoKingdom/app/src/main/res/layout/activity_main.xml" value="0.49230072463768115" />
+        <entry key="..\:/Users/Oskiez/StudioProjects/PomoKingdom/app/src/main/res/layout/fragment_friends.xml" value="0.49230072463768115" />
+        <entry key="..\:/Users/Oskiez/StudioProjects/PomoKingdom/app/src/main/res/layout/fragment_home.xml" value="0.49230072463768115" />
+        <entry key="..\:/Users/Oskiez/StudioProjects/PomoKingdom/app/src/main/res/layout/fragment_item_shop.xml" value="0.16160081053698075" />
+        <entry key="..\:/Users/Oskiez/StudioProjects/PomoKingdom/app/src/main/res/layout/fragment_profile.xml" value="0.49230072463768115" />
+        <entry key="..\:/Users/Oskiez/StudioProjects/PomoKingdom/app/src/main/res/layout/freinds_list_adapter.xml" value="0.328804347826087" />
+        <entry key="..\:/Users/Oskiez/StudioProjects/PomoKingdom/app/src/main/res/layout/friend_card.xml" value="0.5262237762237763" />
         <entry key="..\:/Users/matty/AndroidStudioProjects/PomoKingdom/app/src/main/res/layout/activity_home.xml" value="0.22" />
         <entry key="..\:/Users/matty/AndroidStudioProjects/PomoKingdom/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/matty/AndroidStudioProjects/PomoKingdom/app/src/main/res/layout/activity_main.xml" value="0.22" />
