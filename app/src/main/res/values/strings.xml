@@ -31,4 +31,8 @@
     <string name="level">Level:</string>
     <string name="add">Add</string>
     <string name="addFriend">Add Friend:</string>
+    <string name="item">Item Name</string>
+    <string name="purchase">Purchase</string>
+    <string name="price">Price: </string>
+
 </resources>
