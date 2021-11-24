@@ -8,10 +8,10 @@ import com.example.pomokingdom.R
 class ItemShopAdapter(private var itemShopList:Array<String>? = null):RecyclerView.Adapter<ItemShopViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemShopViewHolder {
-        val context = parent.context
-        val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.friend_list_item,parent,false)
-        return ItemShopViewHolder(view)
+        val context1 = parent.context
+        val inflater1 = LayoutInflater.from(context1)
+        val view1 = inflater1.inflate(R.layout.item_shop_item,parent,false)
+        return ItemShopViewHolder(view1)
     }
 
     override fun onBindViewHolder(holder: ItemShopViewHolder, position: Int) {

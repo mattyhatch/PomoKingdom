@@ -11,8 +11,8 @@ class ItemShopViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(item:String) {
         //Still to implement with api call
-        //bindOrHide(itemNameName,)
-        //bindOrHide(editPrice,"1")
+        bindOrHide(itemName,item)
+        bindOrHide(editPrice,"1")
     }
 
     fun bindOrHide(textView:TextView,data:String?) {
