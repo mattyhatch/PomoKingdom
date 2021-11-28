@@ -1,8 +1,10 @@
 package com.example.pomokingdom.ApiClasses
 
-class FriendsList {
-    private var num_friends:Int? = 0
-    private var friends:Array<String>? = null
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class FriendsList(private var num_friends:Int? = 0,
+        private var friends:Array<String>? = null) {
 
 
     fun getNumFriends():Int? {

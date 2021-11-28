@@ -31,4 +31,10 @@
     <string name="level">Level:</string>
     <string name="add">Add</string>
     <string name="addFriend">Add Friend:</string>
+    <string name="default_study">25</string>
+    <string name="default_short">5</string>
+    <string name="default_long">20</string>
+    <string name="current_task">Current Task: </string>
+    <string name="default_task">None</string>
+    <string name="add_task">Add Task</string>
 </resources>

@@ -1,14 +1,17 @@
 package com.example.pomokingdom.ApiClasses
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
+import java.util.*
 
-class oldUser {
-    @SerializedName("user_name")private var user_name :String? = null
-    @SerializedName("password")private var password:String? = null
-    @SerializedName("friends_list")private var fList:FriendsList? = null
-    @SerializedName("character")private var char:Character1? = null
-    @SerializedName("tasks")private var tasks:Array<String>? = null
-    @SerializedName("date_created")private var date_created:String? = null
+@Serializable
+data class oldUser(@SerializedName("user_name")var user_name :String? = null,
+    @SerializedName("password")private var password:String? = null,
+@SerializedName("friends_list")var fList:FriendsList? = null,
+@SerializedName("character")private var char:Character1? = null,
+@SerializedName("tasks") private var tasks:Array<Task>? = null,
+@SerializedName("date_created")private var date_created:String? = null,
+@SerializedName("_id") private var id:String? = null) {
 
     fun getUsername():String? {
         return user_name
@@ -34,10 +37,10 @@ class oldUser {
     fun getFriends(list:FriendsList?) {
         fList = list
     }
-    fun getTasks():Array<String>? {
+    fun getTasks():Array<Task>? {
         return tasks
     }
-    fun setTasks(temp:Array<String>?) {
+    fun setTasks(temp:Array<Task>?) {
         tasks = temp
     }
     fun getDate() : String? {
@@ -45,5 +48,11 @@ class oldUser {
     }
     fun setDate(date:String?) {
         date_created = date
+    }
+    fun getId():String? {
+        return id
+    }
+    fun setId(id1:String?) {
+       id = id1
     }
 }

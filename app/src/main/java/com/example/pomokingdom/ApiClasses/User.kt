@@ -2,9 +2,10 @@ package com.example.pomokingdom.ApiClasses
 
 import com.auth0.android.jwt.JWT
 import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
-
-class User {
-    @SerializedName("oldUser") private var oldUser:oldUser? = null
-    @SerializedName("token") private var token: JWT? = null
-}
+@Serializable
+data class User(
+    @SerializedName("result") var oldUser:oldUser? = null,
+    @SerializedName("token") var token: String? = null
+)

@@ -4,16 +4,13 @@ plugins {
     id 'kotlin-android'
 }
 
-apply plugin: 'kotlin-kapt'
-apply plugin: 'realm-android'
-
 android {
     compileSdk 30
 
     defaultConfig {
         applicationId "com.example.pomokingdom"
         minSdk 21
-        targetSdk 30
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -39,10 +36,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
-}
-
-realm {
-    syncEnabled = true
+    compileSdkVersion 31
 }
 
 dependencies {
@@ -73,6 +67,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
 
+    //Json
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1'
+
     //JWT
     implementation 'com.auth0.android:jwtdecode:2.0.1'
 
@@ -82,4 +79,8 @@ dependencies {
     //Material edit text
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 
+    //ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha03"
+    implementation "androidx.activity:activity-ktx:1.4.0"
+    implementation "androidx.fragment:fragment-ktx:1.4.0"
 }

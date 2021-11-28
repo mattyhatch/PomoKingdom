@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.pomokingdom.ApiClasses.oldUser
 import com.example.pomokingdom.ApiClasses.userData
 import com.example.pomokingdom.databinding.ActivityLoginBinding
 import com.example.pomokingdom.retrofit.MyService
 import com.example.pomokingdom.retrofit.RetrofitClient
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,8 +51,11 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this@LoginActivity,"Try a different username", Toast.LENGTH_SHORT).show()
                         return
                     }
-                    val intent = Intent(baseContext, MainActivity::class.java)
-                    startActivity(intent)
+                    val intent1 = Intent(baseContext,HomeActivity::class.java).apply {
+                        putExtra("user",response.body())
+                        putExtra("flag",true)
+                    }
+                    startActivity(intent1)
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {

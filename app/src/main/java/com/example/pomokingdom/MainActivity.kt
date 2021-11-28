@@ -51,19 +51,20 @@ class MainActivity : AppCompatActivity() {
         }
         val userStr = binding.editEmail2.text.toString()
         val passStr = binding.editPassword.text.toString()
-        val auth = AuthUser(userStr,passStr)
+        val auth = AuthUser(userStr,passStr,1)
         //Not quite working with database yet, use bypass button to test HomeActivity and beyond functionality
-        val call = myService.apiGetUsers()
+        val call = myService.apiAuthUser(auth)
         call.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if (response.code() != 200) {
-                    Toast.makeText(this@MainActivity, "Failed to respond", Toast.LENGTH_SHORT)
+                    Toast.makeText(this@MainActivity, "Invalid Username/Password, try again", Toast.LENGTH_SHORT)
                         .show()
                     return
                 }
-                val response = response.body()
-                val lmao = 5
-
+                val intent1 = Intent(baseContext, HomeActivity::class.java)
+                intent1.putExtra("flag",true)
+                intent1.putExtra("user",response.body())
+                startActivity(intent1)
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
@@ -72,7 +73,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
     fun bypass() {
+        val flag = false
         val intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra("flag",flag)
         startActivity(intent)
     }
 }

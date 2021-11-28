@@ -1,12 +1,14 @@
 package com.example.pomokingdom.ApiClasses
 
-class Stat {
-    private var level:Int? = null
-    private var xp_to_next_level:Int? = null
-    private var max_hp:Int? = null
-    private var current_hp:Int? = null
-    private var gold:Int? = null
+import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
+@Serializable
+data class Stat(private var level:Int? = null,
+        private var xp_to_next_level:Int? = null,
+        private var max_hp:Int? = null,
+        private var current_hp:Int? = null,
+        private var gold:Int? = null) {
     fun getLevel():Int? {
         return level
     }
