@@ -36,4 +36,14 @@ interface MyService {
 
     @HTTP(method = "DELETE",path = "/api/v1/users/tasks/",hasBody = true)
     fun apiDeleteTask(@Body DeleteTask:DeleteTask):Call<String>
+
+    @GET("/api/v1/users/friends/")
+    fun apiGetFriends(@Query("userId")id:String?):Call<String>
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/v1/users/friends/")
+    fun apiAddFriend(@Body AddFriend:AddFriend):Call<String>
+
+    @HTTP(method = "DELETE",path = "/api/v1/users/friends/",hasBody = true)
+    fun apiDeleteFriend(@Body DeleteFriend:DeleteFriend):Call<String>
 }
