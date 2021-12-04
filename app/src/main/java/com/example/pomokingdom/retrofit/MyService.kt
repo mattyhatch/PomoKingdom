@@ -12,15 +12,15 @@ interface MyService {
     fun apiAddUser(@Body userData: userData): Call<String>
 
     @GET("/api/v1/users/")
-    fun apiGetUsers() : Call<String>
+    fun apiGetUser(@Query("id") id:String?):Call<String>
 
     @Headers("Content-Type: application/json")
     @PUT("/api/v1/users/")
     fun apiAuthUser(@Body authUser: AuthUser):Call<String>
 
     @Headers("Content-Type: application/json")
-    @PUT("/api/v1/users/")
-    fun apiUpdateUser(@Body UpdateUser:UpdateUser):Call<String>
+    @PUT("/api/v1/users/character/")
+    fun apiUpdateChar(@Body UpdateChar:UpdateChar):Call<String>
 
     @GET("/api/v1/users/tasks/")
     fun apiGetTasks(@Query("userId")id:String?):Call<String>
@@ -46,4 +46,16 @@ interface MyService {
 
     @HTTP(method = "DELETE",path = "/api/v1/users/friends/",hasBody = true)
     fun apiDeleteFriend(@Body DeleteFriend:DeleteFriend):Call<String>
+
+    @GET("/api/v1/users/inventory/")
+    fun apiGetInventory(@Query("userId") id:String?):Call<String>
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/v1/users/inventory/")
+    fun apiAddInventory(@Body AddInventory:AddInventory):Call<String>
+
+    @GET("api/v1/itemshop/")
+    fun apiGetItemShop():Call<String>
+
+
 }

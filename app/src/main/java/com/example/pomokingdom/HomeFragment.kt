@@ -40,11 +40,19 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
     private var taskList =mutableListOf<String>()
     private lateinit var adapter1:TaskListAdapter
 
+    override fun onStop() {
+        super.onStop()
+        taskList = mutableListOf<String>()
+        model.setTask(binding.currentTask.text.toString())
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:Bundle?):View? {
         super.onCreateView(inflater,container,savedInstanceState)
         binding = FragmentHomeBinding.inflate(inflater)
         val retrofit = RetrofitClient.getInstance()
         myService = retrofit.create(MyService::class.java)
+        binding.currentTask.text = model.getTask()
+        binding.start.text = if (timerOn)  "Stop" else "Start"
         binding.start.setOnClickListener {
             if(!timerOn) {
                 timerOn = true
@@ -162,11 +170,13 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                     counter = 0
                     timerState = 2
                     binding.phase.text = getString(R.string.long_break)
+                    longGoldXp()
                     timerLong.start()
                 }else {
                     counter++
                     timerState = 1
                     binding.phase.text = getString(R.string.short_break)
+                    shortGoldXp()
                     timerShort.start()
                 }
             }
@@ -216,5 +226,252 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
         }
         binding.timer.text = "00:00"
         binding.phase.text = getString(R.string.study)
+    }
+
+    fun shortGoldXp() {
+        val wood = model.getWoodEquipped()
+        val gold = model.getGoldEquipped()
+        val num_friends = user?.oldUser?.getFriends()?.getNumFriends()
+        val gain:Int = (10 + 10*(0.02*wood) + 10*(0.04*gold) + 10*(num_friends!!.times(0.01))).toInt()
+        val user1 = user?.oldUser
+        val char = user1?.getChar()
+        val stats = char?.getStats()
+        val compare = stats?.getXpNext()?.let { gain?.compareTo(it) }
+        val level:Int?
+        val diff:Int?
+        if(compare != null) {
+            if(compare >= 0) {
+                val level1 = stats.getLevel()
+                level = level1?.plus(1)
+                diff = gain.minus(stats.getXpNext()!!)
+                myService.apiUpdateChar(UpdateChar(user1.getId(),
+                    char.getChar(),
+                    level,
+                    level?.times(100)?.minus(diff),
+                    stats.getMaxHP(),
+                    stats.getCurrentHP(),
+                    stats.getGold()?.plus(gain))).enqueue(
+
+                    object: Callback<String> {
+                        override fun onResponse(call: Call<String>, response: Response<String>) {
+                            if(response.code() != 200) {
+                                Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                            }
+                            val str = response.body()
+                            val gson = Gson()
+                            val result = gson.fromJson(str,AddTaskResult::class.java)
+                            if( result.status == "success") {
+                                myService.apiGetUser(user1?.getId()).enqueue(
+                                    object: Callback<String> {
+                                        override fun onResponse(
+                                            call: Call<String>,
+                                            response: Response<String>
+                                        ) {
+                                            if(response.code() != 200) {
+                                                Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                                            }
+                                            val str = response.body()
+                                            val gson = Gson()
+                                            val result = gson.fromJson(str,oldUser::class.java)
+                                            model.loadUser(User(result,user?.token))
+                                            return
+                                        }
+
+                                        override fun onFailure(call: Call<String>, t: Throwable) {
+                                            Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                                            return
+                                        }
+                                    }
+                                )
+                            }
+                        }
+
+                        override fun onFailure(call: Call<String>, t: Throwable) {
+                            Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                            return
+                        }
+                    })
+                return
+            }
+        } else {
+            Toast.makeText(context,"Failed",Toast.LENGTH_SHORT)
+            return
+        }
+        myService.apiUpdateChar(UpdateChar(user1?.getId(),
+            char?.getChar(),
+            stats?.getLevel(),
+            stats?.getXpNext()?.minus(gain),
+            stats?.getMaxHP(),
+            stats?.getCurrentHP(),
+            stats?.getGold()?.plus(gain))).enqueue(
+            object: Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if(response.code() != 200) {
+                        Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                    }
+                    val str = response.body()
+                    val gson = Gson()
+                    val result = gson.fromJson(str,AddTaskResult::class.java)
+                    if( result.status == "success") {
+                        myService.apiGetUser(user1?.getId()).enqueue(
+                            object: Callback<String> {
+                                override fun onResponse(
+                                    call: Call<String>,
+                                    response: Response<String>
+                                ) {
+                                    if(response.code() != 200) {
+                                        Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                                    }
+                                    val str = response.body()
+                                    val gson = Gson()
+                                    val result = gson.fromJson(str,oldUser::class.java)
+                                    model.loadUser(User(result,user?.token))
+                                }
+
+                                override fun onFailure(call: Call<String>, t: Throwable) {
+                                    Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                                }
+                            }
+                        )
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                }
+            }
+        )
+    }
+
+    fun longGoldXp() {
+        val wood = model.getWoodEquipped()
+        val gold = model.getGoldEquipped()
+        val gain: Int =
+            (50 + 50 * (0.02 * wood) + 50 * (0.04 * gold) + 10 * (user?.oldUser?.getFriends()
+                ?.getNumFriends()
+                ?.times(0.01)!!)).toInt()
+        val user1 = user?.oldUser
+        val char = user1?.getChar()
+        val stats = char?.getStats()
+        val compare = stats?.getXpNext()?.let { gain?.compareTo(it) }
+        val level: Int?
+        val diff: Int?
+        if (compare != null) {
+            if (compare >= 0) {
+                val level1 = stats.getLevel()
+                level = level1?.plus(1)
+                diff = gain.minus(stats.getXpNext()!!)
+                myService.apiUpdateChar(
+                    UpdateChar(
+                        user1.getId(),
+                        char.getChar(),
+                        level,
+                        level?.times(100)?.minus(diff),
+                        stats.getMaxHP(),
+                        stats.getCurrentHP(),
+                        stats.getGold()?.plus(gain)
+                    )
+                ).enqueue(
+
+                    object : Callback<String> {
+                        override fun onResponse(call: Call<String>, response: Response<String>) {
+                            if (response.code() != 200) {
+                                Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT)
+                            }
+                            val str = response.body()
+                            val gson = Gson()
+                            val result = gson.fromJson(str, AddTaskResult::class.java)
+                            if (result.status == "success") {
+                                myService.apiGetUser(user1?.getId()).enqueue(
+                                    object : Callback<String> {
+                                        override fun onResponse(
+                                            call: Call<String>,
+                                            response: Response<String>
+                                        ) {
+                                            if (response.code() != 200) {
+                                                Toast.makeText(
+                                                    context,
+                                                    "Failed to update",
+                                                    Toast.LENGTH_SHORT
+                                                )
+                                            }
+                                            val str = response.body()
+                                            val gson = Gson()
+                                            val result = gson.fromJson(str, oldUser::class.java)
+                                            model.loadUser(User(result, user?.token))
+                                        }
+
+                                        override fun onFailure(call: Call<String>, t: Throwable) {
+                                            Toast.makeText(
+                                                context,
+                                                "Failed to update",
+                                                Toast.LENGTH_SHORT
+                                            )
+                                        }
+                                    }
+                                )
+                            }
+                        }
+
+                        override fun onFailure(call: Call<String>, t: Throwable) {
+                            Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT)
+                        }
+                    })
+            }
+        } else {
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT)
+        }
+        myService.apiUpdateChar(
+            UpdateChar(
+                user1?.getId(),
+                char?.getChar(),
+                stats?.getLevel(),
+                stats?.getXpNext()?.minus(gain),
+                stats?.getMaxHP(),
+                stats?.getCurrentHP(),
+                stats?.getGold()?.plus(gain)
+            )
+        ).enqueue(
+            object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if (response.code() != 200) {
+                        Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT)
+                    }
+                    val str = response.body()
+                    val gson = Gson()
+                    val result = gson.fromJson(str, AddTaskResult::class.java)
+                    if (result.status == "success") {
+                        myService.apiGetUser(user1?.getId()).enqueue(
+                            object : Callback<String> {
+                                override fun onResponse(
+                                    call: Call<String>,
+                                    response: Response<String>
+                                ) {
+                                    if (response.code() != 200) {
+                                        Toast.makeText(
+                                            context,
+                                            "Failed to update",
+                                            Toast.LENGTH_SHORT
+                                        )
+                                    }
+                                    val str = response.body()
+                                    val gson = Gson()
+                                    val result = gson.fromJson(str, oldUser::class.java)
+                                    model.loadUser(User(result, user?.token))
+                                }
+
+                                override fun onFailure(call: Call<String>, t: Throwable) {
+                                    Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT)
+                                }
+                            }
+                        )
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT)
+                }
+            }
+        )
     }
 }

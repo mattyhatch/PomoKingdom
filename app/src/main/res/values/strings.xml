@@ -24,7 +24,8 @@
     <string name="study">Study</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
-    <string name="character">Character Name</string>
+    <string name="character">Character Name:</string>
+    <string name="char2">Character Info:</string>
     <string name="char1">Character Name </string>
     <string name="bypass">Bypass</string>
     <string name="remove">Remove</string>
@@ -37,4 +38,18 @@
     <string name="current_task">Current Task: </string>
     <string name="default_task">None</string>
     <string name="add_task">Add Task</string>
+    <string name="name">Name:</string>
+    <string name="xp">XP to Next Level:</string>
+    <string name="health">Health:</string>
+    <string name="gold">Gold:</string>
+    <string name="inventory">Inventory</string>
+    <string name="item">Item</string>
+    <string name="type">Type</string>
+    <string name="equip">Equip</string>
+    <string name="equipped">Equipped Items:</string>
+    <string name="weapon">Weapon:</string>
+    <string name="shield">Shield:</string>
+    <string name="armor">Armor:</string>
+    <string name="cost">Cost:</string>
+    <string name="buy">Buy</string>
 </resources>

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Character1(private var char_name:String? = null,
         private var stats:Stat? = null,
-        private var inventory:Array<String>? = null) {
+        private var inventory:Array<ItemShopItem>? = null) {
 
     fun getChar():String? {
         return char_name
@@ -13,7 +13,7 @@ data class Character1(private var char_name:String? = null,
     fun getStats():Stat? {
         return stats
     }
-    fun getInventory():Array<String>? {
+    fun getInventory():Array<ItemShopItem>? {
         return inventory
     }
 }

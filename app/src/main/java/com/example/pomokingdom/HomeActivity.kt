@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import com.example.pomokingdom.ApiClasses.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
-import kotlinx.serialization.json.Json
 
 class HomeActivity : AppCompatActivity() {
     private val model:UserViewModel by viewModels()
@@ -36,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
                     setCurrentFragment(homeFragment)
                     true
                 }
-                R.id.profile1 -> {
+                R.id.charInfo -> {
                     setCurrentFragment(profileFragment)
                     true
                 }
