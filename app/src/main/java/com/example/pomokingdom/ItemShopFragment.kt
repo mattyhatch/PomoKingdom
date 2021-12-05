@@ -19,6 +19,7 @@ import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.properties.Delegates
 
 
 class ItemShopFragment : Fragment(R.layout.fragment_item_shop) {
@@ -29,7 +30,6 @@ class ItemShopFragment : Fragment(R.layout.fragment_item_shop) {
     private lateinit var itemList:ItemShopItemList
     private var user: User? = null
     private val model:UserViewModel by activityViewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,6 +64,8 @@ class ItemShopFragment : Fragment(R.layout.fragment_item_shop) {
                 }
             }
         )
+        adapter1 = ItemShopAdapter(mutableListOf(),user,model)
+        setUpRecyclerView()
         return binding.root
     }
 

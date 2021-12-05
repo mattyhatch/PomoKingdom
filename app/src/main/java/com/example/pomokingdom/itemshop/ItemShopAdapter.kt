@@ -96,17 +96,12 @@ class ItemShopAdapter(
                                     val result = gson.fromJson(str,AddTaskResult::class.java)
                                     if(result.status == "success") {
                                         val gold1 = userGold - itemCost
-                                        myService.apiUpdateChar(UpdateChar(user?.oldUser?.getId(),
-                                            user?.oldUser?.getChar()?.getChar(),
-                                            user?.oldUser?.getChar()?.getStats()?.getLevel(),
-                                            user?.oldUser?.getChar()?.getStats()?.getXpNext(),
-                                            user?.oldUser?.getChar()?.getStats()?.getMaxHP(),
-                                            user?.oldUser?.getChar()?.getStats()?.getCurrentHP(),
-                                            gold1)).enqueue (
+                                        myService.apiUpdateCharGold(UpdateCharGold(user?.oldUser?.getId(), gold1)).enqueue (
                                             object: Callback<String> {
                                                 override fun onResponse(call: Call<String>, response: Response<String>) {
                                                     if(response.code() != 200) {
                                                         Toast.makeText(itemView.context,"Failed to update",Toast.LENGTH_SHORT)
+                                                        return
                                                     }
                                                     val str = response.body()
                                                     val gson = Gson()

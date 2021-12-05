@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.register2.setOnClickListener {register()}
         binding.login1.setOnClickListener {login()}
-        binding.bypass.setOnClickListener{bypass()}
     }
     private fun register() {
         val intent = Intent(this, LoginActivity::class.java)
@@ -71,11 +70,5 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Failed to connect", Toast.LENGTH_SHORT).show()
             }
         })
-    }
-    fun bypass() {
-        val flag = false
-        val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("flag",flag)
-        startActivity(intent)
     }
 }

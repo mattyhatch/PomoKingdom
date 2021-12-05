@@ -69,7 +69,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
         recyclerView = binding.taskView
         binding.addTask.setOnClickListener {addTask()}
         val gson  = Gson()
-        user = model?.user
+        user = model.user
         myService.apiGetTasks(user?.oldUser?.getId()).enqueue(
             object:
                 Callback<String> {
@@ -82,7 +82,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                     val gson = Gson()
                     val result = gson.fromJson(str,TaskList::class.java)
                     if(result.tasks != null) {
-                        for (tasks in result.tasks!!) {
+                        for (tasks in result.tasks) {
                             taskList.add(tasks.name)
                         }
                     }
@@ -236,7 +236,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
         val user1 = user?.oldUser
         val char = user1?.getChar()
         val stats = char?.getStats()
-        val compare = stats?.getXpNext()?.let { gain?.compareTo(it) }
+        val compare = stats?.getXpNext()?.let { gain.compareTo(it) }
         val level:Int?
         val diff:Int?
         if(compare != null) {
@@ -255,20 +255,20 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                     object: Callback<String> {
                         override fun onResponse(call: Call<String>, response: Response<String>) {
                             if(response.code() != 200) {
-                                Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                                Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT).show()
                             }
                             val str = response.body()
                             val gson = Gson()
                             val result = gson.fromJson(str,AddTaskResult::class.java)
                             if( result.status == "success") {
-                                myService.apiGetUser(user1?.getId()).enqueue(
+                                myService.apiGetUser(user1.getId()).enqueue(
                                     object: Callback<String> {
                                         override fun onResponse(
                                             call: Call<String>,
                                             response: Response<String>
                                         ) {
                                             if(response.code() != 200) {
-                                                Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                                                Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT).show()
                                             }
                                             val str = response.body()
                                             val gson = Gson()
@@ -278,7 +278,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                                         }
 
                                         override fun onFailure(call: Call<String>, t: Throwable) {
-                                            Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                                            Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT).show()
                                             return
                                         }
                                     }
@@ -287,40 +287,40 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                         }
 
                         override fun onFailure(call: Call<String>, t: Throwable) {
-                            Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                            Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT).show()
                             return
                         }
                     })
                 return
             }
         } else {
-            Toast.makeText(context,"Failed",Toast.LENGTH_SHORT)
+            Toast.makeText(context,"Failed",Toast.LENGTH_SHORT).show()
             return
         }
-        myService.apiUpdateChar(UpdateChar(user1?.getId(),
-            char?.getChar(),
-            stats?.getLevel(),
-            stats?.getXpNext()?.minus(gain),
-            stats?.getMaxHP(),
-            stats?.getCurrentHP(),
-            stats?.getGold()?.plus(gain))).enqueue(
+        myService.apiUpdateChar(UpdateChar(user1.getId(),
+            char.getChar(),
+            stats.getLevel(),
+            stats.getXpNext()?.minus(gain),
+            stats.getMaxHP(),
+            stats.getCurrentHP(),
+            stats.getGold()?.plus(gain))).enqueue(
             object: Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     if(response.code() != 200) {
-                        Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                        Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT).show()
                     }
                     val str = response.body()
                     val gson = Gson()
                     val result = gson.fromJson(str,AddTaskResult::class.java)
                     if( result.status == "success") {
-                        myService.apiGetUser(user1?.getId()).enqueue(
+                        myService.apiGetUser(user1.getId()).enqueue(
                             object: Callback<String> {
                                 override fun onResponse(
                                     call: Call<String>,
                                     response: Response<String>
                                 ) {
                                     if(response.code() != 200) {
-                                        Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                                        Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT).show()
                                     }
                                     val str = response.body()
                                     val gson = Gson()
@@ -329,7 +329,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                                 }
 
                                 override fun onFailure(call: Call<String>, t: Throwable) {
-                                    Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                                    Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT).show()
                                 }
                             }
                         )
@@ -337,7 +337,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT)
+                    Toast.makeText(context,"Failed to update",Toast.LENGTH_SHORT).show()
                 }
             }
         )
@@ -353,7 +353,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
         val user1 = user?.oldUser
         val char = user1?.getChar()
         val stats = char?.getStats()
-        val compare = stats?.getXpNext()?.let { gain?.compareTo(it) }
+        val compare = stats?.getXpNext()?.let { gain.compareTo(it) }
         val level: Int?
         val diff: Int?
         if (compare != null) {
@@ -376,13 +376,13 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                     object : Callback<String> {
                         override fun onResponse(call: Call<String>, response: Response<String>) {
                             if (response.code() != 200) {
-                                Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT)
+                                Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT).show()
                             }
                             val str = response.body()
                             val gson = Gson()
                             val result = gson.fromJson(str, AddTaskResult::class.java)
                             if (result.status == "success") {
-                                myService.apiGetUser(user1?.getId()).enqueue(
+                                myService.apiGetUser(user1.getId()).enqueue(
                                     object : Callback<String> {
                                         override fun onResponse(
                                             call: Call<String>,
@@ -393,7 +393,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                                                     context,
                                                     "Failed to update",
                                                     Toast.LENGTH_SHORT
-                                                )
+                                                ).show()
                                             }
                                             val str = response.body()
                                             val gson = Gson()
@@ -406,7 +406,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                                                 context,
                                                 "Failed to update",
                                                 Toast.LENGTH_SHORT
-                                            )
+                                            ).show()
                                         }
                                     }
                                 )
@@ -414,12 +414,12 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                         }
 
                         override fun onFailure(call: Call<String>, t: Throwable) {
-                            Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT)
+                            Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT).show()
                         }
                     })
             }
         } else {
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT)
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
         }
         myService.apiUpdateChar(
             UpdateChar(
@@ -435,7 +435,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
             object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     if (response.code() != 200) {
-                        Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT).show()
                     }
                     val str = response.body()
                     val gson = Gson()
@@ -452,7 +452,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                                             context,
                                             "Failed to update",
                                             Toast.LENGTH_SHORT
-                                        )
+                                        ).show()
                                     }
                                     val str = response.body()
                                     val gson = Gson()
@@ -461,7 +461,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                                 }
 
                                 override fun onFailure(call: Call<String>, t: Throwable) {
-                                    Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT)
+                                    Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT).show()
                                 }
                             }
                         )
@@ -469,7 +469,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT)
+                    Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT).show()
                 }
             }
         )

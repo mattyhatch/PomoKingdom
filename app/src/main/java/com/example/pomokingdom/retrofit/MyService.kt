@@ -22,6 +22,10 @@ interface MyService {
     @PUT("/api/v1/users/character/")
     fun apiUpdateChar(@Body UpdateChar:UpdateChar):Call<String>
 
+    @Headers("Content-Type: application/json")
+    @PUT("/api/v1/users/character/")
+    fun apiUpdateCharGold(@Body UpdateChar:UpdateCharGold):Call<String>
+
     @GET("/api/v1/users/tasks/")
     fun apiGetTasks(@Query("userId")id:String?):Call<String>
 
