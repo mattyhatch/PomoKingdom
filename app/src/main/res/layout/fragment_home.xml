@@ -31,77 +31,69 @@
         android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
         android:layout_marginEnd="64dp"
         android:text="@string/start"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/timer" />
 
     <TextView
         android:id="@+id/study"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="12dp"
         android:text="@string/default_phase"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timer" />
+        app:layout_constraintTop_toBottomOf="@+id/add_task" />
 
     <EditText
         android:id="@+id/edit_study"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/default_study"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start" />
+        app:layout_constraintTop_toTopOf="@+id/study" />
 
     <TextView
         android:id="@+id/short_break1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
         android:layout_marginTop="40dp"
         android:text="@string/short_break"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/study"
         app:layout_constraintTop_toBottomOf="@+id/study" />
 
     <EditText
         android:id="@+id/edit_short"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/default_short"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_study" />
+        app:layout_constraintEnd_toEndOf="@+id/edit_study"
+        app:layout_constraintTop_toTopOf="@+id/short_break1" />
 
     <TextView
         android:id="@+id/long_break1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
         android:layout_marginTop="44dp"
         android:text="@string/long_break"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/short_break1"
         app:layout_constraintTop_toBottomOf="@+id/short_break1" />
 
     <EditText
         android:id="@+id/edit_long"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/default_long"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_short" />
+        app:layout_constraintEnd_toEndOf="@+id/edit_short"
+        app:layout_constraintTop_toTopOf="@+id/long_break1" />
 
     <TextView
         android:id="@+id/textView3"
@@ -125,31 +117,40 @@
         android:id="@+id/task_view"
         android:layout_width="match_parent"
         android:layout_height="270dp"
-        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_task" />
+        app:layout_constraintTop_toBottomOf="@+id/tasks" />
 
     <EditText
         android:id="@+id/editTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
+        android:layout_marginStart="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/add_task"
-        app:layout_constraintEnd_toStartOf="@+id/add_task"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/add_task" />
 
     <Button
         android:id="@+id/add_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
         android:text="@string/add_task"
+        app:layout_constraintStart_toEndOf="@+id/editTask"
+        app:layout_constraintTop_toBottomOf="@+id/start" />
+
+    <TextView
+        android:id="@+id/tasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/tasks"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_long" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

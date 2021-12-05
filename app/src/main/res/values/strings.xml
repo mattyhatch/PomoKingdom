@@ -52,4 +52,5 @@
     <string name="armor">Armor:</string>
     <string name="cost">Cost:</string>
     <string name="buy">Buy</string>
+    <string name="tasks">Tasks</string>
 </resources>
