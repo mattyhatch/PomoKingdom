@@ -181,4 +181,13 @@
         android:text="@string/default_task"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView12" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="@string/logout"
+        app:layout_constraintStart_toEndOf="@+id/charName"
+        app:layout_constraintTop_toTopOf="@+id/name1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

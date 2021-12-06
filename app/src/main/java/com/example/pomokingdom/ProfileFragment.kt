@@ -1,5 +1,6 @@
 package com.example.pomokingdom
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -58,6 +59,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),InventoryAdapter.OnI
             binding.shieldEquipped.text = arr1[1]
             binding.armorEquipped.text = arr1[2]
         }
+        binding.logout.setOnClickListener { logout() }
         recyclerView = binding.inventoryList
         myService.apiGetInventory(user?.oldUser?.getId()).enqueue( object:
             Callback<String> {
@@ -99,6 +101,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),InventoryAdapter.OnI
         if (animator is SimpleItemAnimator) {
             animator.supportsChangeAnimations = false
         }
+    }
+
+    private fun logout() {
+        val intent = Intent(context,MainActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onItemClick(position: Int) {

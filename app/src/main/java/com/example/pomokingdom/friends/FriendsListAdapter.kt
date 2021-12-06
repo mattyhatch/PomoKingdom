@@ -73,7 +73,7 @@ class FriendsListAdapter(private var friendsList:MutableList<String>? = null,
                         val result = gson.fromJson(str, AddTaskResult::class.java)
                         if(result.status == "success") {
                             friendsList?.remove(friendsList?.get(position))
-                            setList(friendsList)
+                            notifyDataSetChanged()
                             Toast.makeText(itemView.context,"Successfully deleted", Toast.LENGTH_SHORT).show()
                         }
                         else {
